@@ -5,12 +5,12 @@ const { sequelize } = require('../models')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('roles', {
+        await queryInterface.createTable('Roles', {
             id: {
-                allowNull: false,
-                primaryKey: true,
-                type: Sequelize.UUID,
-                defaultValue: sequelize.UUID,
+              allowNull: false,
+              autoIncrement: true,
+              primaryKey: true,
+              type: Sequelize.INTEGER
             },
             nome: {
                 type: Sequelize.STRING,

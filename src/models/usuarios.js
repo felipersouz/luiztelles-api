@@ -8,16 +8,14 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Usuarios.belongsToMany(models.roles, {
+            Usuarios.belongsTo(models.Roles, {
                 through: models.usuarios_roles,
-                as: 'usuario_roles',
-                foreignKey: 'usuario_id',
+                foreignKey: 'roleId',
             })
-            Usuarios.belongsToMany(models.permissoes, {
-                through: models.usuarios_permissoes,
-                as: 'usuario_permissoes',
-                foreignKey: 'usuario_id',
-            })
+            Usuarios.belongsTo(models.Planos, {
+              as: 'plano',
+              foreignKey: 'planosId'
+          });
         }
     }
     Usuarios.init(
@@ -30,6 +28,22 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true,
             },
+            planosId: {
+              type: DataTypes.INTEGER,
+              allowNull: true,
+              references: {
+                  model: 'Planos', 
+                  key: 'id'
+              }
+          },
+          roleId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'roles', 
+                key: 'id'
+            }
+        }
         },
         {
             sequelize,

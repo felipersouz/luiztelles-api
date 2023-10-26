@@ -5,6 +5,10 @@ const _usuarioService = new UsuarioService()
 class UsuarioController {
     static async Cadastrar(req, res) {
         const dto = req.body
+        const userDto = req.body.usuario;
+        const planId = req.body.planId;
+        const roleId = req.body.roleId;
+        
 
         try {
             const usuario = await _usuarioService.Cadastrar(dto)
