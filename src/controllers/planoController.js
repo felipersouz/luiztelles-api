@@ -1,17 +1,17 @@
-const UsuarioService = require('../services/usuarioService')
+const PlanoService = require('../services/planoService')
 
-const _usuarioService = new UsuarioService()
+const planoService = new PlanoService()
 
-class UsuarioController {
+class PlanoController {
     static async Cadastrar(req, res) {
         //adicionar permissão e validação
         const dto = req.body
         
         try {
-            const usuario = await _usuarioService.Cadastrar(dto)
+            const plano = await planoService.Cadastrar(dto)
             const response = {
-              usuario,
-              message: "Usuário criado com sucesso!"
+              plano,
+              message: "plano criado com sucesso!"
             }
             return res.status(200).json(response)
         } catch (error) {
@@ -23,8 +23,8 @@ class UsuarioController {
         const id = req.params.id
 
         try {
-            const usuario = await _usuarioService.ObterPorId(id)
-            return res.status(200).json(usuario)
+            const plano = await planoService.ObterPorId(id)
+            return res.status(200).json(plano)
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -32,10 +32,10 @@ class UsuarioController {
 
     static async ObterTodos(req, res) {
         try {
-            const usuarios = await _usuarioService.ObterTodos()
+            const planos = await planoService.ObterTodos()
             const response = {
-              usuarios,
-              message:"Usuarios retornados com sucesso!"
+              planos,
+              message:"Planos retornados com sucesso!"
             }
             return res.status(200).json(response)
         } catch (error) {
@@ -48,8 +48,8 @@ class UsuarioController {
         const dto = req.body
 
         try {
-            const usuarioAtualizado = await _usuarioService.Atualizar(id, dto)
-            return res.status(200).json(usuarioAtualizado)
+            const plano = await planoService.Atualizar(id, dto)
+            return res.status(200).json(plano)
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -59,14 +59,14 @@ class UsuarioController {
         const id = req.params.id
 
         try {
-            await _usuarioService.Deletar(id)
+            await planoService.Deletar(id)
             return res
                 .status(200)
-                .json({ message: 'Usuário excluído com sucesso' })
+                .json({ message: 'Plano excluído com sucesso' })
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
 }
 
-module.exports = UsuarioController
+module.exports = PlanoController

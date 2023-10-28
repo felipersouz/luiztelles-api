@@ -4,8 +4,7 @@ const cors = require('cors')
 const usuarios = require('./usuarioRoute')
 const auth = require('./authRoute')
 const role = require('./roleRoute')
-const permissoes = require('./permissoesRoute')
-const seguranca = require('./segurancaRoute')
+const planos = require('./planosRoute')
 
 module.exports = (app) => {
     app.use(
@@ -16,7 +15,6 @@ module.exports = (app) => {
         auth,
         usuarios,
         role,
-        permissoes,
-        seguranca
+        planos,
     )
 }

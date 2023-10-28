@@ -22,6 +22,8 @@ class UsuarioService {
                 sobrenome: dto.sobrenome,
                 email: dto.email,
                 senha: senhaHash,
+                rolesId: dto.rolesId,
+                planosId: dto.planosId
             })
             return novoUsuario
         } catch (error) {

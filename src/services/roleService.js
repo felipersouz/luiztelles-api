@@ -3,7 +3,7 @@ const uuid = require('uuid')
 
 class RoleService {
     async Cadastrar(dto) {
-        const role = await database.roles.findOne({
+        const role = await database.Roles.findOne({
             where: {
                 nome: dto.nome,
             },
@@ -14,28 +14,28 @@ class RoleService {
         }
 
         try {
-            const newRole = await database.roles.create({
-                id: uuid.v4(),
+            const newRole = await database.Roles.create({
                 nome: dto.nome,
                 descricao: dto.descricao,
             })
             return newRole
         } catch (error) {
-            throw new Error('Houve uma falha ao cadastrar a nova role')
+            console.log("newRole", error)
+            throw new Error('Houve uma falha ao cadastrar a nova role', error)
         }
     }
     async Buscar() {
-        const roles = await database.roles.findAll()
+        const roles = await database.Roles.findAll()
         return roles
     }
 
     async Obter(id) {
-        const role = await database.roles.findOne({ where: { id } })
+        const role = await database.Roles.findOne({ where: { id } })
         return role
     }
 
     async Atualizar(id, dto) {
-        const role = await database.roles.findOne({ where: { id } })
+        const role = await database.Roles.findOne({ where: { id } })
 
         if (!role) {
             throw new Error('Role não encontrada')
@@ -54,7 +54,7 @@ class RoleService {
     }
 
     async Excluir(id) {
-        const role = await database.roles.findOne({ where: { id } })
+        const role = await database.Roles.findOne({ where: { id } })
 
         if (!role) {
             throw new Error('Role não encontrada')

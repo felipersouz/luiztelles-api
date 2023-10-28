@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Usuarios.belongsTo(models.Roles, {
                 through: models.usuarios_roles,
-                foreignKey: 'roleId',
+                foreignKey: 'rolesId',
             })
             Usuarios.belongsTo(models.Planos, {
               as: 'plano',
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
                   key: 'id'
               }
           },
-          roleId: {
+          rolesId: {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
