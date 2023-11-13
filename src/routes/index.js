@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const autenticado = require('../middleware/autenticado')
 
 const usuarios = require('./usuarioRoute')
 const auth = require('./authRoute')
@@ -13,6 +14,7 @@ module.exports = (app) => {
             origin: ['http://localhost:4200'],
         }),
         auth,
+        autenticado,
         usuarios,
         role,
         planos,

@@ -27,7 +27,7 @@ class AuthService {
                 email: usuario.email,
             },
             jsonSecret.secret,
-            { expiresIn: 8000 }
+            { expiresIn: '24h' }
         )
         return { accessToken }
     }

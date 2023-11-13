@@ -1,8 +1,5 @@
 const { Router } = require('express')
 const PlanoController = require('../controllers/planoController')
-const autenticado = require('../middleware/autenticado')
-
-
 
 const router = Router()
 
