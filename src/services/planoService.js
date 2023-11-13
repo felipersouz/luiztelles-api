@@ -53,7 +53,6 @@ class PlanoService {
     async ObterTodos() {
         try {
             const planos = await database.Planos.findAll()
-            console.log("Planos?", planos)
             return planos
         } catch (error) {
             throw new Error('Erro ao obter todos os planos')

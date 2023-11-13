@@ -1,8 +1,8 @@
 const { verify, decode } = require('jsonwebtoken')
-const jsonSecret = require('../config/jsonSecret')
 
 module.exports = async (req, res, next) => {
     const token = req.headers.authorization
+    const jsonSecret = process.env.JWT_SECRET
 
     if (!token) {
         return res.status(401).send('Acess token nao informado')
@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
     const [, accessToken] = token.split(' ')
 
     try {
-        verify(accessToken, jsonSecret.secret)
+        verify(accessToken, jsonSecret)
 
         const { id, email } = await decode(accessToken)
 

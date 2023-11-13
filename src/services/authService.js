@@ -1,10 +1,10 @@
 const database = require('../models')
 const { compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
-const jsonSecret = require('../config/jsonSecret')
 
 class AuthService {
     async Login(dto) {
+        const jsonSecret = process.env.JWT_SECRET
         const usuario = await database.Usuarios.findOne({
             attributes: ['id', 'email', 'senha'],
             where: {
@@ -26,7 +26,7 @@ class AuthService {
                 id: usuario.id,
                 email: usuario.email,
             },
-            jsonSecret.secret,
+            jsonSecret,
             { expiresIn: '24h' }
         )
         return { accessToken }
