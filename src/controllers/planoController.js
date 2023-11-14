@@ -6,7 +6,7 @@ class PlanoController {
     static async Cadastrar(req, res) {
         const dto = req.body
         if(!dto.name || !dto.limit_email){
-          return res.status(400).json({message: "Dados incompletos"})
+          return res.status(400).json({message: "Parâmetro name e limit_email são obrigatórios!"})
         }
         try {
             const plano = await planoService.Cadastrar(dto)
@@ -16,7 +16,7 @@ class PlanoController {
             }
             return res.status(200).json(response)
         } catch (error) {
-            return res.status(500).json(error.message)
+            return res.status(500).json({message:error.message})
         }
     }
 

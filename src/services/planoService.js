@@ -5,7 +5,7 @@ class PlanoService {
         try {
             const planoExistente = await database.Planos.findOne({
               where: {
-                  nome: dto.name,
+                  name: dto.name,
               },
             })
 
@@ -21,8 +21,8 @@ class PlanoService {
             return novoPlano
 
         } catch (error) {
-            console.log("Erro ao cadastrar plano", error)
-            throw new Error('Erro ao cadastrar novo plano')
+            console.log("Cadastrar planos error", error)
+            throw new Error(error.message)
         }
     }
 
