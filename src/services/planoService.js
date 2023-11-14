@@ -3,12 +3,25 @@ const database = require('../models')
 class PlanoService {
     async Cadastrar(dto) {
         try {
-            const novoPlano = await database.Planos.create({
-                name: dto.name,
-                limit_email: dto.limit_email
+            const planoExistente = await database.Planos.findOne({
+              where: {
+                  nome: dto.name,
+              },
             })
+
+            if (planoExistente) {
+              throw new Error('Plano já cadastrado')
+            }
+
+            const novoPlano = await database.Planos.create({
+                  name: dto.name,
+                  limit_email: dto.limit_email
+              })
+            
             return novoPlano
+
         } catch (error) {
+            console.log("Erro ao cadastrar plano", error)
             throw new Error('Erro ao cadastrar novo plano')
         }
     }
