@@ -48,7 +48,7 @@ class PlanoController {
     static async Atualizar(req, res) {
         const id = req.params.id
         const dto = req.body
-        if(!id || dto.name || dto.limit_email) res.status(400).json({message: "Dados incompletos"});
+        if(!id) res.status(400).json({message: "Id não informado"});
 
         try {
             const plano = await planoService.Atualizar(id, dto)

@@ -41,7 +41,7 @@ class PlanoService {
         }
         try {
             await plano.update({
-                name: dto.nome,
+                name: dto.name,
                 limit_email: dto.limit_email,
             })
             return plano
