@@ -4,8 +4,10 @@ const _usuarioService = new UsuarioService()
 
 class UsuarioController {
     static async Cadastrar(req, res) {
-        //adicionar permissão e validação
         const dto = req.body
+        if(!dto.email || !dto.senha){
+          return res.status(400).json({message: "Dados incompletos"})
+        }
         
         try {
             const usuario = await _usuarioService.Cadastrar(dto)
