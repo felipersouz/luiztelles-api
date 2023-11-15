@@ -45,16 +45,15 @@ class UsuarioService {
             throw new Error('Usuário não encontrado')
         }
         try {
-            const senhaHash = await hash(dto.senha, 8)
             await usuario.update({
                 nome: dto.nome,
                 sobrenome: dto.sobrenome,
                 email: dto.email,
-                senha: senhaHash,
             })
             return usuario
         } catch (error) {
-            throw new Error('Erro ao atualizar usuário')
+            console.log("Erro", error)
+            throw new Error('Erro ao atualizar usuário', error.message)
         }
     }
 
@@ -76,7 +75,7 @@ class UsuarioService {
             const usuarios = await database.Usuarios.findAll()
             return usuarios
         } catch (error) {
-            throw new Error('Erro ao obter todos os usuários')
+            throw new Error('Erro ao obter todos os usuários:', error.message)
         }
     }
 }
