@@ -49,10 +49,12 @@ class UsuarioService {
                 nome: dto.nome,
                 sobrenome: dto.sobrenome,
                 email: dto.email,
+                planosId: dto.planosId,
+                rolesId: dto.rolesId,
             })
             return usuario
         } catch (error) {
-            console.log("Erro", error)
+            console.log("Update User Error", error)
             throw new Error('Erro ao atualizar usuário', error.message)
         }
     }
@@ -73,11 +75,33 @@ class UsuarioService {
     async ObterTodos() {
         try {
             const usuarios = await database.Usuarios.findAll()
-            return usuarios
+            const formatedUsers = await formatUsers(usuarios);
+            return formatedUsers
         } catch (error) {
             throw new Error('Erro ao obter todos os usuários:', error.message)
         }
     }
+}
+
+const formatUsers= async (usersParams)=> {
+  const users = JSON.parse(JSON.stringify(usersParams));
+  try {
+    const formatedUsers = await Promise.all(users.map(async (user)=> {
+      if(!user.planosId) return Promise.resolve(user);
+      const plano = await database.Planos.findByPk(user.planosId)
+      const role = await database.Roles.findByPk(user.rolesId);
+      console.log("plan", plano)
+      user.plano = plano;
+      user.role = role;
+      delete user.planosId;
+      delete user.rolesId;
+      return Promise.resolve(user);
+    }));
+    return formatedUsers;
+  } catch (error) {
+    console.log("Format Users error", error);
+    throw new Error(error); 
+  }
 }
 
 module.exports = UsuarioService
