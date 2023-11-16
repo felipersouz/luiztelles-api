@@ -23,7 +23,7 @@ class UsuarioService {
                 email: dto.email,
                 senha: senhaHash,
                 rolesId: dto.rolesId,
-                planosId: dto.planosId
+                planosId: dto.planosId,
             })
             return novoUsuario
         } catch (error) {
@@ -49,12 +49,13 @@ class UsuarioService {
                 nome: dto.nome,
                 sobrenome: dto.sobrenome,
                 email: dto.email,
-                planosId: dto.planosId,
                 rolesId: dto.rolesId,
+                planosId: dto.planosId,
+                status: dto.status,
             })
             return usuario
         } catch (error) {
-            console.log("Update User Error", error)
+            console.log('Update User error', error)
             throw new Error('Erro ao atualizar usuário', error.message)
         }
     }
