@@ -91,7 +91,6 @@ const formatUsers= async (usersParams)=> {
       if(!user.planosId) return Promise.resolve(user);
       const plano = await database.Planos.findByPk(user.planosId)
       const role = await database.Roles.findByPk(user.rolesId);
-      console.log("plan", plano)
       user.plano = plano;
       user.role = role;
       delete user.planosId;
