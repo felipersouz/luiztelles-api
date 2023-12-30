@@ -16,18 +16,21 @@ class UsuarioService {
 
         try {
             const senhaHash = await hash(dto.senha, 8)
-            const novoUsuario = await database.Usuarios.create({
-                id: uuid.v4(),
+            const usuario = {
+              id: uuid.v4(),
                 nome: dto.nome,
-                sobrenome: dto.sobrenome,
                 email: dto.email,
                 senha: senhaHash,
-                rolesId: dto.rolesId,
-                planosId: dto.planosId,
-            })
+            }
+            if(dto.sobrenome) usuario.sobrenome = dto.sobrenome;
+            usuario.planosId = dto.planosId || null;
+            usuario.rolesId = dto.rolesId || null;
+            console.log("usuario", usuario)
+            const novoUsuario = await database.Usuarios.create(usuario)
             return novoUsuario
         } catch (error) {
-            throw new Error('Erro ao cadastrar novo usuário')
+          console.log("New User error", error.message)
+            throw new Error('Erro ao cadastrar novo usuário', error.message)
         }
     }
 
