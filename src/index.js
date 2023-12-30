@@ -8,8 +8,8 @@ const port = process.env.PORT;
 
 routes(app);
 
-app.listen(port, () =>
-  console.log("servidor rodando em http://localhost:" + port)
+app.listen(port, process.env.APP_HOST, () =>
+  console.log(`servidor rodando em http://${process.env.APP_HOST}:` + port)
 );
 
 module.exports = app;
