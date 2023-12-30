@@ -4,6 +4,7 @@ const UsuarioController = require('../controllers/usuarioController')
 
 const router = Router()
 
+router.get('/', UsuarioController.Hello)
 router.post('/auth/login', AuthController.Login)
 router.post('/auth/register', UsuarioController.Cadastrar)
 

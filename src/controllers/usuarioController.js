@@ -3,6 +3,15 @@ const UsuarioService = require('../services/usuarioService')
 const _usuarioService = new UsuarioService()
 
 class UsuarioController {
+
+  static async Hello(req, res) {
+    const response = {
+      message: "Hello world"
+    }
+    return res.status(200).json(response)
+}
+
+
     static async Cadastrar(req, res) {
         const dto = req.body
         if(!dto.email || !dto.senha){
