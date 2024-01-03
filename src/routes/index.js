@@ -10,9 +10,7 @@ const planos = require('./planosRoute')
 module.exports = (app) => {
     app.use(
         bodyParser.json(),
-        cors({
-            origin: ['http://localhost:4200'],
-        }),
+        cors(),
         auth,
         autenticado,
         usuarios,
